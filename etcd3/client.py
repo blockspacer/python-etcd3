@@ -204,7 +204,7 @@ class Etcd3Client(object):
                                  revision=None,
                                  sort_order=None,
                                  sort_target='key',
-                                 serializable=None,
+                                 serializable=True,
                                  keys_only=None,
                                  count_only=None,
                                  min_mod_revision=None,
