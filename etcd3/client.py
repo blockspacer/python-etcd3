@@ -204,7 +204,7 @@ class Etcd3Client(object):
                                  revision=None,
                                  sort_order=None,
                                  sort_target='key',
-                                 serializable=True,
+                                 serializable=None,
                                  keys_only=None,
                                  count_only=None,
                                  min_mod_revision=None,
@@ -242,7 +242,7 @@ class Etcd3Client(object):
         return range_request
 
     @_handle_errors
-    def get(self, key):
+    def get(self, key, is_serializable=None):
         """
         Get the value of a key from etcd.
 
@@ -259,7 +259,7 @@ class Etcd3Client(object):
         :returns: value of key and metadata
         :rtype: bytes, ``KVMetadata``
         """
-        range_request = self._build_get_range_request(key)
+        range_request = self._build_get_range_request(key, serializable=is_serializable)
         range_response = self.kvstub.Range(
             range_request,
             self.timeout,
